@@ -1,0 +1,277 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Django To Do App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+     <!-- Add an icon -->
+    <link rel="icon" href="{% static 'images/icons/pink_heart_logo.gif' %}" type="image/gif">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-image: url('{% static "images/pink_rain.gif" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Nunito', sans-serif;
+            padding-top: 50px;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6
+            {
+            font-family: 'Raleway', sans-serif;
+        }
+
+        a,
+        p {
+            color: #4b5156
+        }
+
+        a {
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background-color: #fff;
+            -webkit-box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
+            box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
+        }
+
+        input {
+            outline: none;
+            border: none;
+        }
+
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            background-image: url('{% static "images/pink_typing.gif" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 150px;
+        }
+
+        .header-bar a {
+            color: rgb(247, 247, 247);
+            text-decoration: none;
+        }
+
+        .task-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            border-top: 1px solid #dfe4ea;
+            overflow: hidden;
+        }
+
+        .task-title {
+            display: flex;
+            padding: 20px;
+        }
+
+        .task-title a {
+            text-decoration: none;
+            color: #4b5156;
+            margin-left: 10px;
+        }
+
+        .task-complete-icon {
+            background-image: url('{% static "images/icons/icons8-complete.gif" %}');
+            height: 20px;
+            width: 20px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .task-incomplete-icon {
+            background-image: url('{% static "images/icons/icons8-high-priority.gif" %}');
+            height: 20px;
+            width: 20px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .delete-link {
+            text-decoration: none;
+
+        }
+
+        /*Handle Classes*/
+
+        .handle {
+            display: inline-block;
+            padding: 20px 16px;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .handle:after,
+        .handle:before {
+            display: block;
+            content: "";
+        }
+
+        .handle:active,
+        .handle:active:before,
+        .handle:active:after {
+            cursor: grabbing;
+        }
+
+        .dropArea {
+            background-color: #f1f2f6;
+            color: black;
+            border: #ced6e0 1px solid;
+        }
+
+        .selectedTask {
+            opacity: 0.6;
+        }
+
+
+        #add-link {
+            height: auto;
+            width: auto;
+        }
+
+        #search-add-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        @media screen and (max-width:320px) {
+            #search-add-wrapper {
+                padding: 10px;
+            }
+        }
+
+        input[type=text],
+        input[type=password],
+        textarea {
+            border: 1px solid #757575;
+            border-radius: 5px;
+            padding: 10px;
+            width: 90%;
+        }
+
+        label {
+            padding-top: 10px !important;
+            display: block;
+        }
+
+        ::placeholder {
+            font-weight: 300;
+            opacity: 0.5;
+        }
+
+        .button {
+            border: 1px solid #757575;
+            background-color: #FFF;
+            color: #EB796F;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+        .urgent-text {
+            display: inline-block;
+            animation: pulse 1s infinite; /* Adjust animation duration as needed */
+            margin-left: 50px;
+            color: red;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        #musicPlayer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: pink;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #musicPlayer button {
+            background-color: white;
+            color: grey;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        #musicPlayer button:hover {
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        {% block content %}{% endblock content %}
+    </div>
+    
+ <!-- Music player GUI as a styled footer -->
+    <div id="musicPlayer">
+        <audio id="bgMusic" loop>
+            <source src="{% static 'audio/bgmusic.m4a' %}" type="audio/mp4">
+            Your browser does not support the audio element.
+        </audio>
+        <button onclick="togglePlayPause()">Play/Pause</button>
+        <button onclick="toggleMute()">Mute/Unmute</button>
+    </div>
+
+    <script>
+        const bgMusic = document.getElementById('bgMusic');
+
+        function togglePlayPause() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+            } else {
+                bgMusic.pause();
+            }
+        }
+
+        function toggleMute() {
+            bgMusic.muted = !bgMusic.muted;
+        }
+    </script>
+</body>
+
+
+</html>
